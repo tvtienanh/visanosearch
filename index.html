@@ -76,7 +76,7 @@
         /* Added toggle button styles */
         .toggle-search-btn {
             position: fixed;
-            top: 20px;
+            top: 50px;
             right: 20px;
             background-color: var(--primary-color);
             color: white;
@@ -89,17 +89,60 @@
             box-shadow: var(--box-shadow);
             transition: var(--transition);
             z-index: 1000;
-            display: none;
+            display: none; /* Hidden initially, shown after search */
         }
 
         .toggle-search-btn:hover {
             background-color: var(--primary-hover);
             transform: scale(1.1);
         }
+        
+        /* Chat popup styles */
+        .chat-popup {
+            position: absolute;
+            top: 50%;
+            right: 100%;
+            transform: translateY(-50%);
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            font-size: 13px;
+            color: #2d3748;
+            white-space: nowrap;
+            z-index: 1001;
+            opacity: 1;
+            visibility: visible;
+            transition: all 0.3s ease;
+            max-width: 300px; /* increased from 280px to 300px to fully prevent text cutoff */
+            margin-right: 8px;
+        }
+        
+        .chat-popup::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            transform: translateY(-50%);
+            border: 6px solid transparent;
+            border-left-color: white;
+        }
+        
+        .chat-popup::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            transform: translateY(-50%);
+            border: 7px solid transparent;
+            border-left-color: #e2e8f0;
+        }
 
         .search-collapsed {
-            display: none;
+            display: none !important;
         }
+
 
         .search-box {
             position: relative;
@@ -208,34 +251,6 @@
             accent-color: var(--primary-color);
         }
 
-        .btn {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 12px 24px; /* reduced padding from 16px 32px to 12px 24px */
-            border: none;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-size: 14px; /* reduced font size from 16px to 14px */
-            font-weight: 500;
-            transition: var(--transition);
-            display: block;
-            width: 100%;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(68, 177, 193, 0.2);
-        }
-
-        .btn:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
 
         /* Progress Section */
         .progress-section {
@@ -440,10 +455,117 @@
             text-align: center;
         }
 
-        .export-section {
-            padding: 20px 24px;
-            border-top: 1px solid #e2e8f0;
+        /* Control Panel Styles (copied from index.html) */
+        .control-panel {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-bottom: 2px solid #e2e8f0;
+            padding: 16px 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .left-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .right-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .stats-display {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            font-size: 14px;
+            color: #2d3748;
+        }
+        
+        .stat-badge {
+            background: #e6f3ff;
+            color: #2b6cb0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+            border: 1px solid #bee3f8;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            width: 100%;
             text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Export section buttons - smaller size */
+        .control-panel .btn {
+            padding: 8px 16px;
+            font-size: 13px;
+            display: inline-flex;
+            width: auto;
+            min-width: 120px;
+            text-transform: none;
+            letter-spacing: 0.3px;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(68, 177, 193, 0.2);
+        }
+        
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .btn-primary {
+            background: #3182ce;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2c5aa0;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(49, 130, 206, 0.3);
+        }
+        
+        .btn-outline {
+            background: white;
+            color: #3182ce;
+            border: 1px solid #3182ce;
+        }
+        
+        .btn-outline:hover {
+            background: #ebf8ff;
+            border-color: #2c5aa0;
+        }
+        
+        .font-weight-bold {
+            font-weight: 600 !important;
         }
 
         .btn-secondary {
@@ -504,6 +626,10 @@
                 font-size: 24px;
             }
         }
+
+        .auto-hidden {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -529,6 +655,9 @@
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
+            <div class="chat-popup">
+                Tra cứu thêm số đăng ký tại đây
+            </div>
         </button>
 
         <!-- Search Section -->
@@ -582,6 +711,32 @@
         <!-- Added cache notification -->
         <div class="cache-notification" id="cacheNotification">
             <strong>📋 Dữ liệu từ bộ nhớ đệm:</strong> Đây là kết quả đã tìm kiếm trước đó cho từ khóa này.
+        </div>
+
+        <!-- Control Panel (only shown when there are results) -->
+        <div class="control-panel" id="controlPanel" style="display: none;">
+            <div class="left-controls">
+                <div class="stats-display">
+                    <div class="stat-badge">
+                        Kết quả tìm thấy: <span id="resultsCount" class="font-weight-bold">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="right-controls">
+                <button class="btn btn-outline" onclick="toggleFilterSection()">
+                    <span id="filterToggleText">Ẩn bộ lọc</span>
+                </button>
+                <button class="btn btn-outline" onclick="clearResults()">
+                    Xóa kết quả
+                </button>
+                <button class="btn btn-primary" onclick="exportToExcel()">
+                    Xuất Excel
+                </button>
+                <button class="btn btn-outline" onclick="exportToJSON()">
+                    Xuất JSON
+                </button>
+            </div>
         </div>
 
         <!-- Results Section -->
@@ -666,12 +821,6 @@
                 </table>
             </div>
 
-            <div class="export-section">
-                <!-- Replaced CSV export with Excel export -->
-                <button class="btn-secondary" onclick="exportToExcel()">Xuất Excel</button>
-                <button class="btn-secondary" onclick="exportToJSON()">Xuất JSON</button>
-                <button class="btn-secondary" onclick="clearResults()">Xóa kết quả</button>
-            </div>
         </div>
     </div>
 
@@ -712,13 +861,19 @@
             const searchSection = document.getElementById('searchSection');
             const toggleBtn = document.getElementById('toggleSearchBtn');
             
-            if (searchSection.classList.contains('search-collapsed')) {
-                searchSection.classList.remove('search-collapsed');
+            const isHidden = searchSection.classList.contains('search-collapsed') || 
+                            searchSection.classList.contains('auto-hidden');
+            
+            if (isHidden) {
+                searchSection.classList.remove('search-collapsed', 'auto-hidden');
                 toggleBtn.innerHTML = `
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
                         <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
+                    <div class="chat-popup">
+                        Tra cứu thêm số đăng ký tại đây
+                    </div>
                 `;
                 toggleBtn.title = "Ẩn tìm kiếm";
             } else {
@@ -728,10 +883,14 @@
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
+                    <div class="chat-popup">
+                        Tra cứu thêm số đăng ký tại đây
+                    </div>
                 `;
                 toggleBtn.title = "Hiện tìm kiếm";
             }
         }
+
 
         function toggleAdvancedFilters() {
             const filtersContent = document.getElementById('filtersContent');
@@ -777,7 +936,10 @@
             // Show progress section
             document.getElementById('progressSection').style.display = 'block';
             document.getElementById('resultsSection').style.display = 'none';
-            document.getElementById('searchBtn').disabled = true;
+            
+            const searchBtn = document.getElementById('searchBtn');
+            searchBtn.disabled = true;
+            searchBtn.textContent = 'Đang tìm kiếm...';
 
             const progress = document.getElementById('progress');
             const progressText = document.getElementById('progressText');
@@ -819,7 +981,9 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Accept': 'application/json',
                     },
+                    mode: 'cors',
                     body: JSON.stringify(payload)
                 });
 
@@ -875,15 +1039,24 @@
 
             } catch (error) {
                 clearInterval(progressInterval);
-                progressText.textContent = 'Lỗi: ' + error.message;
+                
+                // Show specific error message for CORS
+                let errorMessage = error.message;
+                if (error.message.includes('CORS') || error.message.includes('blocked') || error.message.includes('Access-Control-Allow-Origin')) {
+                    errorMessage = 'Lỗi CORS: Không thể kết nối đến server. Vui lòng thử lại hoặc kiểm tra kết nối mạng.';
+                }
+                
+                progressText.textContent = 'Lỗi: ' + errorMessage;
                 progress.style.backgroundColor = '#ff4d4d';
                 countdownElement.textContent = 'Lỗi';
                 
                 // Re-enable search button after error
                 setTimeout(function() {
                     document.getElementById('progressSection').style.display = 'none';
-                    document.getElementById('searchBtn').disabled = false;
                 }, 3000);
+            } finally {
+                searchBtn.disabled = false;
+                searchBtn.textContent = 'Tìm kiếm';
             }
         }
 
@@ -893,9 +1066,25 @@
             filteredResults = [...searchResults];
             
             document.getElementById('cacheNotification').classList.add('show');
+            document.getElementById('controlPanel').style.display = 'flex'; // Show control panel for cached results
             document.getElementById('resultsSection').style.display = 'block';
             document.getElementById('resultFilters').classList.add('show');
-            document.getElementById('toggleSearchBtn').style.display = 'block';
+            
+            const searchSection = document.getElementById('searchSection');
+            const toggleBtn = document.getElementById('toggleSearchBtn');
+            
+            searchSection.classList.add('auto-hidden');
+            toggleBtn.style.display = 'block';
+            toggleBtn.innerHTML = `
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <div class="chat-popup">
+                    Tra cứu thêm số đăng ký tại đây
+                </div>
+            `;
+            toggleBtn.title = "Hiện tìm kiếm";
             
             populateFilterOptions();
             displayFilteredResults(cached.totalResults, cached.displayedResults);
@@ -908,35 +1097,46 @@
 
         function displayNoResults() {
             document.getElementById('progressSection').style.display = 'none';
+            document.getElementById('controlPanel').style.display = 'none'; // Hide control panel when no results
             document.getElementById('resultsSection').style.display = 'block';
             document.getElementById('resultsCount').textContent = '0 kết quả';
             document.getElementById('tableBody').innerHTML = '<tr><td colspan="12" class="text-center">Không tìm thấy kết quả</td></tr>';
-            document.getElementById('searchBtn').disabled = false;
+            
+            const searchBtn = document.getElementById('searchBtn');
+            searchBtn.disabled = false;
+            searchBtn.textContent = 'Tìm kiếm';
         }
 
         function displayResults(data, totalOriginal, fromCache = false) {
             document.getElementById('progressSection').style.display = 'none';
             document.getElementById('cacheNotification').classList.remove('show'); // Hide cache notification
+            document.getElementById('controlPanel').style.display = 'flex'; // Show control panel when there are results
             document.getElementById('resultsSection').style.display = 'block';
             document.getElementById('resultFilters').classList.add('show'); // Show result filters
             
             const searchSection = document.getElementById('searchSection');
             const toggleBtn = document.getElementById('toggleSearchBtn');
             
-            if (!searchSection.classList.contains('search-collapsed')) {
-                searchSection.classList.add('search-collapsed');
-                toggleBtn.style.display = 'block';
-                toggleBtn.innerHTML = `
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                `;
-                toggleBtn.title = "Hiện tìm kiếm";
-            }
+            searchSection.classList.add('auto-hidden');
+            toggleBtn.style.display = 'block';
+            toggleBtn.innerHTML = `
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <div class="chat-popup">
+                    Tra cứu thêm số đăng ký tại đây
+                </div>
+            `;
+            toggleBtn.title = "Hiện tìm kiếm";
 
             filteredResults = [...data];
             document.getElementById('resultsCount').textContent = `${filteredResults.length} kết quả (Tổng gốc: ${totalOriginal})`;
+            // Update control panel count
+            const controlPanelCount = document.querySelector('#controlPanel .stat-badge .font-weight-bold');
+            if (controlPanelCount) {
+                controlPanelCount.textContent = filteredResults.length;
+            }
             
             const tableBody = document.getElementById('tableBody');
             tableBody.innerHTML = '';
@@ -976,6 +1176,12 @@
                     <td class="text-center">${((item.congTySanXuat && item.congTySanXuat.nuocSanXuat) || "").trim()}</td>
                 `;
                 
+                if (index === 0) {
+                    console.log("[v0] Sample item structure:", item);
+                    console.log("[v0] Company registration data:", item.congTyDangKy);
+                    console.log("[v0] Company manufacturing data:", item.congTySanXuat);
+                }
+
                 tableBody.appendChild(row);
             });
 
@@ -1184,15 +1390,32 @@
             link.click();
         }
 
+        function toggleFilterSection() {
+            const filterSection = document.getElementById('resultFilters');
+            const toggleText = document.getElementById('filterToggleText');
+            
+            if (filterSection.classList.contains('show')) {
+                filterSection.classList.remove('show');
+                toggleText.textContent = 'Hiện bộ lọc';
+            } else {
+                filterSection.classList.add('show');
+                toggleText.textContent = 'Ẩn bộ lọc';
+            }
+        }
+
         function clearResults() {
             searchResults = [];
             filteredResults = []; // Clear filtered results
             searchCache = {}; // Clear cache
+            document.getElementById('controlPanel').style.display = 'none'; // Hide control panel when clearing results
             document.getElementById('resultsSection').style.display = 'none';
             document.getElementById('resultFilters').classList.remove('show'); // Hide result filters
             document.getElementById('cacheNotification').classList.remove('show'); // Hide cache notification
             document.getElementById('toggleSearchBtn').style.display = 'none';
-            document.getElementById('searchSection').classList.remove('search-collapsed');
+            
+            const searchSection = document.getElementById('searchSection');
+            searchSection.classList.remove('search-collapsed', 'auto-hidden');
+            
             document.getElementById('searchText').value = '';
             document.getElementById('domesticOnly').checked = false;
             document.getElementById('resultLimit').value = '500';
